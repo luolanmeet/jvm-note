@@ -1,0 +1,19 @@
+{
+    "title": "jvm笔记",
+    "description": "Java虚拟机相关知识笔记",
+    "author": "chenken",
+    "output.name": "site",
+    "language": "zh-hans",
+    "gitbook": "3.2.3",
+    "root": ".",
+	
+	"plugins": [
+		"-search",
+        "-sharing",
+        "-highlight"
+    ],
+	"styles": {
+        "website": "styles/website.css"
+    }
+	
+}
