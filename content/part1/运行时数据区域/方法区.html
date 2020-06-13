@@ -1,0 +1,441 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>方法区 · jvm笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="chenken">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="直接内存.html" />
+    
+    
+    <link rel="prev" href="Java堆.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">☕️Java虚拟机</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍔内存区域</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../运行时数据区域.html">
+            
+                <a href="../运行时数据区域.html">
+            
+                    
+                    运行时数据区域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="程序计数器.html">
+            
+                <a href="程序计数器.html">
+            
+                    
+                    程序计数器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="Java虚拟机栈.html">
+            
+                <a href="Java虚拟机栈.html">
+            
+                    
+                    Java虚拟机栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="本地方法栈.html">
+            
+                <a href="本地方法栈.html">
+            
+                    
+                    本地方法栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="Java堆.html">
+            
+                <a href="Java堆.html">
+            
+                    
+                    Java堆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.5" data-path="方法区.html">
+            
+                <a href="方法区.html">
+            
+                    
+                    方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="直接内存.html">
+            
+                <a href="直接内存.html">
+            
+                    
+                    直接内存
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../对象的知识.html">
+            
+                <a href="../对象的知识.html">
+            
+                    
+                    对象的知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../对象的知识/对象的生命周期.html">
+            
+                <a href="../对象的知识/对象的生命周期.html">
+            
+                    
+                    对象的生命周期
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../对象的知识/对象的内存布局.html">
+            
+                <a href="../对象的知识/对象的内存布局.html">
+            
+                    
+                    对象的内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../对象的知识/对象的访问定位.html">
+            
+                <a href="../对象的知识/对象的访问定位.html">
+            
+                    
+                    对象的访问定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍨垃圾收集器</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../part2/垃圾收集器.html">
+            
+                <a href="../../part2/垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../../part2/垃圾收集器/对象存活的判断.html">
+            
+                <a href="../../part2/垃圾收集器/对象存活的判断.html">
+            
+                    
+                    对象存活的判断
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >方法区</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x65B9;&#x6CD5;&#x533A;&#xFF08;method-area&#xFF09;">&#x65B9;&#x6CD5;&#x533A;&#xFF08;Method Area&#xFF09;</h3>
+<p>&#x540C;&#x5806;&#x4E00;&#x6837;&#xFF0C;&#x65B9;&#x6CD5;&#x533A;&#x662F;&#x7EBF;&#x7A0B;&#x5171;&#x4EAB;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x88AB;&#x865A;&#x62DF;&#x673A;&#x52A0;&#x8F7D;&#x7684;</p>
+<p><strong>&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#x3001;&#x5E38;&#x91CF;&#x3001;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x3001;&#x5373;&#x65F6;&#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x4EE3;&#x7801;&#x7F13;&#x5B58;&#x7B49;&#x6570;&#x636E;</strong>&#x3002;</p>
+<blockquote>
+<p>&#x9488;&#x5BF9;&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x5185;&#x5B58;&#x56DE;&#x6536;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x5BF9;&#x5E38;&#x91CF;&#x6C60;&#x7684;&#x56DE;&#x6536;&#x548C;&#x7C7B;&#x578B;&#x7684;&#x5378;&#x8F7D;</p>
+</blockquote>
+<h4 id="&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x5B9E;&#x73B0;">&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x5B9E;&#x73B0;</h4>
+<p>&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x4E0D;&#x53D7;&#x300A;<code>Java</code>&#x865A;&#x62DF;&#x673A;&#x89C4;&#x8303;&#x300B;&#x7EA6;&#x675F;&#xFF0C;&#x4E0D;&#x8981;&#x6C42;&#x7EDF;&#x4E00;&#x3002;</p>
+<ul>
+<li><code>JDK8</code>&#x4E4B;&#x524D;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x4F7F;&#x7528;&#x5806;&#x7684;&#x6C38;&#x4E45;&#x4EE3;&#x5B9E;&#x73B0;<ul>
+<li><code>JDK7</code>&#x7684;<code>HotSpot</code>&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x3001;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x79FB;&#x51FA;&#x3002;</li>
+<li><code>JDK8</code>&#x7684;<code>HotSpot</code>&#x5C06;<code>JDK7</code>&#x4E2D;&#x6C38;&#x4E45;&#x4EE3;&#x5269;&#x4F59;&#x7684;&#x5185;&#x5BB9;&#xFF08;&#x4E3B;&#x8981;&#x662F;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF09;&#x79FB;&#x5230;&#x5143;&#x7A7A;&#x95F4;&#x4E2D;</li>
+</ul>
+</li>
+<li><code>JDK8</code>&#x7684;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x4F7F;&#x7528;&#x5143;&#x7A7A;&#x95F4;&#xFF08;<code>Meta Space</code>&#xFF09;&#x5B9E;&#x73B0;</li>
+</ul>
+<h4 id="&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x6982;&#x5FF5;">&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x6982;&#x5FF5;</h4>
+<p>&#x6C38;&#x4E45;&#x4EE3;&#x548C;&#x65B9;&#x6CD5;&#x533A;&#x5E76;&#x4E0D;&#x7B49;&#x4EF7;&#xFF0C;&#x53EA;&#x662F;<code>JDK8</code>&#x4E4B;&#x524D;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x7684;&#x8BBE;&#x8BA1;&#x56E2;&#x961F;&#x4F7F;&#x7528;&#x6C38;&#x4E45;&#x4EE3;&#x6765;&#x5B9E;&#x73B0;&#x65B9;&#x6CD5;&#x533A;&#x800C;&#x5DF2;&#xFF0C;</p>
+<p>&#x4F7F;&#x5F97;<code>HotSpot</code>&#x7684;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x80FD;&#x591F;&#x50CF;&#x7BA1;&#x7406;<code>Java</code>&#x5806;&#x4E00;&#x6837;&#x7BA1;&#x7406;&#x65B9;&#x6CD5;&#x533A;&#x3002;</p>
+<h4 id="&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;&#xFF08;runtime-constant-pool&#xFF09;">&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;&#xFF08;Runtime Constant Pool&#xFF09;</h4>
+<p>&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;<code>Class</code>&#x6587;&#x4EF6;&#x4E2D;&#x9664;&#x4E86;&#x6709;&#x7C7B;&#x7684;&#x7248;&#x672C;&#x3001;&#x5B57;&#x6BB5;&#x3001;&#x65B9;&#x6CD5;&#x3001;&#x63A5;&#x53E3;&#x7B49;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#x5916;&#xFF0C;</p>
+<p>&#x8FD8;&#x6709;&#x4E00;&#x9879;&#x5C31;&#x662F;&#x5E38;&#x91CF;&#x6C60;&#x8868;&#xFF08;<code>Constant Pool Table</code>&#xFF09;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x7F16;&#x8BD1;&#x671F;&#x751F;&#x6210;&#x7684;&#x5404;&#x79CD;&#x5B57;&#x9762;&#x91CF;&#x4E0E;&#x7B26;&#x53F7;&#x5F15;&#x7528;&#xFF0C;</p>
+<p>&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x5C06;&#x5728;&#x7C7B;&#x52A0;&#x8F7D;&#x540E;&#x5B58;&#x653E;&#x5230;&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x8FD0;&#x884C;&#x65F6;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#x3002;</p>
+<h4 id="&#x9898;">&#x9898;</h4>
+<pre><code class="lang-Java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+
+    String str1 = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;&#x8BA1;&#x7B97;&#x673A;&quot;</span>).append(<span class="hljs-string">&quot;&#x8F6F;&#x4EF6;&quot;</span>).toString();
+    System.out.println(str1.intern() == str1);
+
+    String str2 = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;ja&quot;</span>).append(<span class="hljs-string">&quot;va&quot;</span>).toString();
+    System.out.println(str2.intern() == str2);
+}
+</code></pre>
+<p><code>String::intern()</code>&#x662F;&#x4E00;&#x4E2A;&#x672C;&#x5730;&#x65B9;&#x6CD5;&#xFF0C;&#x4F5C;&#x7528;&#x662F;&#x5982;&#x679C;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#x5DF2;&#x7ECF;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x7B49;&#x4E8E;&#x6B64;<code>String</code>&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;</p>
+<p>&#x5219;&#x8FD4;&#x56DE;&#x6C60;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5C06;&#x6B64;<code>String</code>&#x5BF9;&#x8C61;&#x5305;&#x542B;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x6DFB;&#x52A0;&#x5230;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x6B64;<code>String</code>&#x5BF9;&#x8C61;&#x7684;&#x5E94;&#x7528;&#x3002;</p>
+<blockquote>
+<p><code>JDK6</code>&#x4E2D;&#x4E0A;&#x8FB9;&#x7684;&#x4EE3;&#x7801;&#x8FD4;&#x56DE;<code>false</code>&#x3001;<code>false</code>&#xFF0C;</p>
+<p><code>intern()</code>&#x65B9;&#x6CD5;&#x5C06;<code>str1</code>/<code>str2</code>&#x5B9E;&#x4F8B;&#x590D;&#x5236;&#x5230;&#x6C38;&#x4E45;&#x4EE3;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#xFF0C;</p>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x6C38;&#x4E45;&#x4EE3;&#x91CC;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x4E0E;&#x5F53;&#x524D;&#x5806;&#x4E2D;&#x7684;<code>str1</code>/<code>str2</code>&#x4E0D;&#x540C;&#xFF0C;&#x56E0;&#x6B64;&#x4E3A;<code>false</code>&#x3002;</p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><code>JDK7</code>&#x4E2D;&#x5C06;&#x8FD4;&#x56DE;<code>true</code>&#x3001;<code>false</code>&#xFF0C;</p>
+<p><code>intern()</code>&#x65B9;&#x6CD5;&#x4E0D;&#x9700;&#x8981;&#x590D;&#x5236;&#x5B57;&#x7B26;&#x4E32;&#x5230;&#x6C38;&#x4E45;&#x4EE3;&#x4E86;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x5DF2;&#x7ECF;&#x79FB;&#x5230;<code>Java</code>&#x5806;&#x4E2D;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;&#x5E38;&#x91CF;&#x6C60;&#x91CC;&#x8BB0;&#x5F55;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x5B9E;&#x4F8B;&#x5F15;&#x7528;&#x5373;&#x53EF;&#x3002;</p>
+<p><code>str1</code>&#x662F;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#xFF0C;&#x56E0;&#x6B64;<code>str1.intern()</code>&#x8FD4;&#x56DE;&#x7684;&#x5730;&#x5740;&#x4E5F;&#x662F;<code>str1</code>&#x5B9E;&#x4F8B;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x56E0;&#x6B64;&#x4E3A;<code>true</code>&#x3002;</p>
+<p><code>str2</code>&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;<code>Java</code>&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x5728;&#x5DF2;&#x7ECF;&#x5728;&#x5E38;&#x91CF;&#x6C60;&#xFF08;&#x5728;&#x52A0;&#x8F7D;<code>sum.misc.Version</code>&#x65F6;&#x8FDB;&#x5165;&#x5E38;&#x91CF;&#x6C60;&#xFF09;&#xFF0C;</p>
+<p>&#x56E0;&#x6B64;<code>str2.intern()</code>&#x8FD4;&#x56DE;&#x7684;&#x5730;&#x5740;&#x4E0D;&#x7B49;&#x4E8E;<code>str1</code>&#x5B9E;&#x4F8B;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x4E3A;<code>false</code>&#x3002;</p>
+</blockquote>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Java堆.html" class="navigation navigation-prev " aria-label="Previous page: Java堆">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="直接内存.html" class="navigation navigation-next " aria-label="Next page: 直接内存">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"方法区","level":"2.1.5","depth":2,"next":{"title":"直接内存","level":"2.1.6","depth":2,"path":"content/part1/运行时数据区域/直接内存.md","ref":"content/part1/运行时数据区域/直接内存.md","articles":[]},"previous":{"title":"Java堆","level":"2.1.4","depth":2,"path":"content/part1/运行时数据区域/Java堆.md","ref":"content/part1/运行时数据区域/Java堆.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-sharing","chapter-fold"],"root":".","styles":{"website":"styles/website.css"},"pluginsConfig":{"chapter-fold":{},"highlight":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"chenken","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"jvm笔记","language":"zh-hans","output.name":"site","gitbook":"3.2.3","description":"Java虚拟机相关知识笔记"},"file":{"path":"content/part1/运行时数据区域/方法区.md","mtime":"2020-06-13T10:14:26.386Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-13T11:32:05.405Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

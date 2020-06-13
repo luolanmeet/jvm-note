@@ -1,0 +1,486 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>对象的内存布局 · jvm笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="chenken">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="对象的访问定位.html" />
+    
+    
+    <link rel="prev" href="对象的生命周期.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">☕️Java虚拟机</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍔内存区域</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../运行时数据区域.html">
+            
+                <a href="../运行时数据区域.html">
+            
+                    
+                    运行时数据区域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../运行时数据区域/程序计数器.html">
+            
+                <a href="../运行时数据区域/程序计数器.html">
+            
+                    
+                    程序计数器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../运行时数据区域/Java虚拟机栈.html">
+            
+                <a href="../运行时数据区域/Java虚拟机栈.html">
+            
+                    
+                    Java虚拟机栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../运行时数据区域/本地方法栈.html">
+            
+                <a href="../运行时数据区域/本地方法栈.html">
+            
+                    
+                    本地方法栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../运行时数据区域/Java堆.html">
+            
+                <a href="../运行时数据区域/Java堆.html">
+            
+                    
+                    Java堆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../运行时数据区域/方法区.html">
+            
+                <a href="../运行时数据区域/方法区.html">
+            
+                    
+                    方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../运行时数据区域/直接内存.html">
+            
+                <a href="../运行时数据区域/直接内存.html">
+            
+                    
+                    直接内存
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../对象的知识.html">
+            
+                <a href="../对象的知识.html">
+            
+                    
+                    对象的知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="对象的生命周期.html">
+            
+                <a href="对象的生命周期.html">
+            
+                    
+                    对象的生命周期
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="2.3.1" data-path="对象的内存布局.html">
+            
+                <a href="对象的内存布局.html">
+            
+                    
+                    对象的内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="对象的访问定位.html">
+            
+                <a href="对象的访问定位.html">
+            
+                    
+                    对象的访问定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍨垃圾收集器</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../part2/垃圾收集器.html">
+            
+                <a href="../../part2/垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../../part2/垃圾收集器/对象存活的判断.html">
+            
+                <a href="../../part2/垃圾收集器/对象存活的判断.html">
+            
+                    
+                    对象存活的判断
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >对象的内存布局</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;">&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;</h3>
+<p>&#x5728;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x4E2D;&#xFF0C;&#x5BF9;&#x8C61;&#x5728;&#x5806;&#x4E2D;&#x7684;&#x5B58;&#x50A8;&#x5E03;&#x5C40;&#x53EF;&#x4EE5;&#x5212;&#x5206;&#x4E3A;&#x4E09;&#x4E2A;&#x90E8;&#x5206;</p>
+<ul>
+<li>&#x5BF9;&#x8C61;&#x5934;&#xFF08;<code>Header</code>&#xFF09;<ul>
+<li><code>Mark Work</code></li>
+<li>&#x7C7B;&#x578B;&#x6307;&#x9488;</li>
+<li>&#x5982;&#x679C;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5B58;&#x50A8;&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;</li>
+</ul>
+</li>
+<li>&#x5B9E;&#x4F8B;&#x6570;&#x636E;&#xFF08;<code>Instance Data</code>&#xFF09;</li>
+<li>&#x5BF9;&#x9F50;&#x586B;&#x5145;&#xFF08;<code>Padding</code>&#xFF09;</li>
+</ul>
+<h4 id="&#x5BF9;&#x8C61;&#x5934;">&#x5BF9;&#x8C61;&#x5934;</h4>
+<p><code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x5BF9;&#x8C61;&#x7684;&#x5BF9;&#x8C61;&#x5934;&#x90E8;&#x5206;&#x5305;&#x62EC;&#x4E24;&#x7C7B;&#x4FE1;&#x606F;&#x3002;</p>
+<h6 id="mark-work"><code>Mark Work</code></h6>
+<p>&#x4E00;&#x7C7B;&#x662F;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x5BF9;&#x8C61;&#x81EA;&#x8EAB;&#x7684;&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x54C8;&#x5E0C;&#x7801;&#xFF0C;<code>GC</code>&#x5206;&#x4EE3;&#x5E74;&#x9F84;&#xFF0C;&#x9501;&#x72B6;&#x6001;&#x3001;&#x7EBF;&#x7A0B;&#x6301;&#x6709;&#x7684;&#x9501;&#x3001;&#x504F;&#x5411;&#x7EBF;&#x7A0B;<code>ID</code>&#x3001;&#x504F;&#x5411;&#x65F6;&#x95F4;&#x6233;&#x7B49;&#x3002;</p>
+<p>&#x8FD9;&#x90E8;&#x5206;&#x6570;&#x636E;&#x7684;&#x957F;&#x5EA6;&#x5728;32&#x4F4D;&#x548C;64&#x4F4D;&#x7684;&#x865A;&#x62DF;&#x673A;&#xFF08;&#x672A;&#x5F00;&#x542F;&#x6307;&#x9488;&#x538B;&#x7F29;&#xFF09;&#x4E2D;&#x5206;&#x522B;&#x5360;&#x7528;32&#x548C;64&#x4E2A;&#x6BD4;&#x7279;&#xFF0C;&#x5B98;&#x65B9;&#x79F0;&#x4E3A;<code>Mark Work</code>&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x5B58;&#x50A8;&#x7684;&#x7A7A;&#x95F4;&#x6548;&#x7387;&#xFF0C;<code>Mark Work</code>&#x88AB;&#x8BBE;&#x8BA1;&#x6210;&#x4E00;&#x4E2A;&#x6709;&#x7740;<strong>&#x52A8;&#x6001;&#x5B9A;&#x4E49;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</strong>&#xFF0C;&#x4EE5;&#x4FBF;&#x5728;&#x6781;&#x5C0F;&#x7684;&#x7A7A;&#x95F4;&#x5B58;&#x50A8;&#x5C3D;&#x91CF;&#x591A;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x5176;&#x5B58;&#x50A8;&#x60C5;&#x51B5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5B58;&#x50A8;&#x5185;&#x5BB9;</th>
+<th>&#x6807;&#x5FD7;&#x4F4D;</th>
+<th>&#x72B6;&#x6001;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5BF9;&#x8C61;&#x54C8;&#x5E0C;&#x7801;&#x3001;&#x5BF9;&#x8C61;&#x5206;&#x4EE3;&#x5E74;&#x9F84;</td>
+<td>01</td>
+<td>&#x672A;&#x9501;&#x5B9A;</td>
+</tr>
+<tr>
+<td>&#x6307;&#x5411;&#x9501;&#x8BB0;&#x5F55;&#x7684;&#x6307;&#x9488;</td>
+<td>00</td>
+<td>&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#x5B9A;</td>
+</tr>
+<tr>
+<td>&#x6307;&#x5411;&#x91CD;&#x91CF;&#x7EA7;&#x9501;&#x7684;&#x6307;&#x9488;</td>
+<td>10</td>
+<td>&#x91CD;&#x91CF;&#x7EA7;&#x9501;&#x5B9A;&#xFF08;&#x9501;&#x81A8;&#x80C0;&#xFF09;</td>
+</tr>
+<tr>
+<td>&#x7A7A;&#x3001;&#x4E0D;&#x9700;&#x8981;&#x8BB0;&#x5F55;&#x4FE1;&#x606F;</td>
+<td>11</td>
+<td><code>GC</code>&#x6807;&#x8BB0;</td>
+</tr>
+<tr>
+<td>&#x504F;&#x5411;&#x7EBF;&#x7A0B;<code>ID</code>&#x3001;&#x504F;&#x5411;&#x65F6;&#x95F4;&#x6233;&#x3001;&#x5BF9;&#x8C61;&#x5206;&#x4EE3;&#x5E74;&#x9F84;</td>
+<td>01</td>
+<td>&#x53EF;&#x504F;&#x5411;</td>
+</tr>
+</tbody>
+</table>
+<h6 id="&#x7C7B;&#x578B;&#x6307;&#x9488;">&#x7C7B;&#x578B;&#x6307;&#x9488;</h6>
+<p>&#x5373;&#x5BF9;&#x8C61;&#x6307;&#x5411;&#x5B83;&#x7684;&#x7C7B;&#x578B;&#x5143;&#x6570;&#x636E;&#x7684;&#x6307;&#x9488;&#x3002;<code>Java</code>&#x865A;&#x62DF;&#x673A;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x6307;&#x9488;&#x6765;&#x786E;&#x5B9A;&#x8BE5;&#x5BF9;&#x8C61;&#x662F;&#x54EA;&#x4E2A;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;</p>
+<blockquote>
+<p>&#x5E76;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x865A;&#x62DF;&#x673A;&#x7684;&#x5B9E;&#x73B0;&#x90FD;&#x5FC5;&#x987B;&#x5728;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x4E0A;&#x4FDD;&#x7559;&#x7C7B;&#x578B;&#x6307;&#x9488;&#x3002;</p>
+</blockquote>
+<h4 id="&#x5B9E;&#x4F8B;&#x6570;&#x636E;">&#x5B9E;&#x4F8B;&#x6570;&#x636E;</h4>
+<p>&#x5B9E;&#x4F8B;&#x6570;&#x636E;&#x662F;&#x5BF9;&#x8C61;&#x771F;&#x6B63;&#x5B58;&#x50A8;&#x7684;&#x6709;&#x6548;&#x4FE1;&#x606F;&#xFF0C;&#x5373;&#x4EE3;&#x7801;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x5404;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#x5185;&#x5BB9;&#x3002;</p>
+<h6 id="&#x5B57;&#x6BB5;&#x7684;&#x5B58;&#x50A8;&#x987A;&#x5E8F;">&#x5B57;&#x6BB5;&#x7684;&#x5B58;&#x50A8;&#x987A;&#x5E8F;</h6>
+<p>&#x53D7;&#x865A;&#x62DF;&#x673A;&#x5206;&#x914D;&#x7B56;&#x7565;&#x53C2;&#x6570;&#xFF08;<code>-XX:FieldsAllocationStyle</code>&#xFF09;&#x548C;&#x5B57;&#x6BB5;&#x5728;&#x6E90;&#x7801;&#x4E2D;&#x7684;&#x5B9A;&#x4E49;&#x987A;&#x5E8F;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x9ED8;&#x8BA4;&#x7684;&#x987A;&#x5E8F;&#xFF1A;</p>
+<blockquote>
+<p>longs/doubles&#x3001;ints&#x3001;shorts/chars&#x3001;bytes/booleans&#x3001;oops</p>
+</blockquote>
+<p>&#x76F8;&#x540C;&#x5BBD;&#x5EA6;&#x7684;&#x603B;&#x88AB;&#x5206;&#x914D;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5728;&#x6EE1;&#x8DB3;&#x8FD9;&#x4E2A;&#x524D;&#x63D0;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7236;&#x7C7B;&#x7684;&#x53D8;&#x91CF;&#x4F1A;&#x51FA;&#x73B0;&#x5728;&#x5B50;&#x7C7B;&#x4E4B;&#x524D;&#x3002;</p>
+<p>&#x5982;&#x679C;<code>XX:FieldsAllocationStyle=0</code>&#xFF08;&#x9ED8;&#x8BA4;&#x662F;1&#xFF09;&#xFF0C;&#x90A3;&#x4E48;<code>oops</code>&#x4F1A;&#x5728;&#x6700;&#x524D;&#x8FB9;&#x3002;</p>
+<p>&#x5982;&#x679C;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x7684;<code>+XX:CompactFields</code>&#x53C2;&#x6570;&#x4E3A;<code>true</code>&#xFF08;&#x9ED8;&#x8BA4;<code>true</code>&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x5B50;&#x7C7B;&#x4E4B;&#x4E2D;&#x8F83;</p>
+<p>&#x7A84;&#x7684;&#x53D8;&#x91CF;&#x4E5F;&#x5141;&#x8BB8;&#x63D2;&#x5165;&#x5230;&#x7236;&#x7C7B;&#x53D8;&#x91CF;&#x7684;&#x7A7A;&#x9699;&#x4E4B;&#x4E2D;&#x3002;</p>
+<h4 id="&#x5BF9;&#x9F50;&#x586B;&#x5145;">&#x5BF9;&#x9F50;&#x586B;&#x5145;</h4>
+<p>&#x7531;&#x4E8E;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x7684;&#x81EA;&#x52A8;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x8981;&#x6C42;&#x5BF9;&#x8C61;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x662F;8&#x5B57;&#x8282;&#x7684;&#x6574;&#x6570;&#x500D;&#xFF0C;</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#x7684;&#x5927;&#x5C0F;&#x5FC5;&#x987B;&#x662F;8&#x5B57;&#x8282;&#x7684;&#x6574;&#x6570;&#x500D;&#x3002;</p>
+<h4 id="&#x67E5;&#x770B;&#x5BF9;&#x8C61;&#x5185;&#x5B58;&#x5E03;&#x5C40;">&#x67E5;&#x770B;&#x5BF9;&#x8C61;&#x5185;&#x5B58;&#x5E03;&#x5C40;</h4>
+<p>&#x53EF;&#x5229;&#x7528;<code>jol</code>&#x67E5;&#x770B;&#x5BF9;&#x8C61;&#x5185;&#x90E8;&#x5E03;&#x5C40;&#xFF0C;&#x6CE8;&#x610F;&#x5927;&#x5C0F;&#x7AEF;&#x3002;</p>
+<pre><code class="lang-Java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+    <span class="hljs-comment">/*
+     jvm &#x9ED8;&#x8BA4;&#x5F00;&#x542F;&#x504F;&#x5411;&#x9501;&#xFF08;-XX:+UseBiasedLocking&#xFF09;
+     &#x5728;jvm&#x542F;&#x52A8;&#x540E;4s&#x5F00;&#x542F;&#xFF08;-XX:BiasedLockingStartupDelay=4000&#xFF09;&#xFF0C;&#x4F1A;&#x770B;&#x5230;101
+     TimeUnit.SECONDS.sleep(5);
+    */</span>
+
+    Object obj = <span class="hljs-keyword">new</span> Object();
+    System.out.println(ClassLayout.parseInstance(obj).toPrintable());
+
+    <span class="hljs-comment">// &#x52A0;&#x9501;&#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5BF9;&#x8C61;&#x5934;&#x7684;&#x9501;&#x6807;&#x8BC6;&#x53D1;&#x751F;&#x6539;&#x53D8;</span>
+    <span class="hljs-keyword">synchronized</span> (obj) {
+        System.out.println(ClassLayout.parseInstance(obj).toPrintable());
+    }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="对象的生命周期.html" class="navigation navigation-prev " aria-label="Previous page: 对象的生命周期">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="对象的访问定位.html" class="navigation navigation-next " aria-label="Next page: 对象的访问定位">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"对象的内存布局","level":"2.3.1","depth":2,"next":{"title":"对象的访问定位","level":"2.3.2","depth":2,"path":"content/part1/对象的知识/对象的访问定位.md","ref":"content/part1/对象的知识/对象的访问定位.md","articles":[]},"previous":{"title":"对象的生命周期","level":"2.3","depth":1,"path":"content/part1/对象的知识/对象的生命周期.md","ref":"content/part1/对象的知识/对象的生命周期.md","articles":[{"title":"对象的内存布局","level":"2.3.1","depth":2,"path":"content/part1/对象的知识/对象的内存布局.md","ref":"content/part1/对象的知识/对象的内存布局.md","articles":[]},{"title":"对象的访问定位","level":"2.3.2","depth":2,"path":"content/part1/对象的知识/对象的访问定位.md","ref":"content/part1/对象的知识/对象的访问定位.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-sharing","chapter-fold"],"root":".","styles":{"website":"styles/website.css"},"pluginsConfig":{"chapter-fold":{},"highlight":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"chenken","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"jvm笔记","language":"zh-hans","output.name":"site","gitbook":"3.2.3","description":"Java虚拟机相关知识笔记"},"file":{"path":"content/part1/对象的知识/对象的内存布局.md","mtime":"2020-06-13T09:02:07.645Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-13T11:32:05.405Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
