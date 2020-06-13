@@ -15,7 +15,7 @@
   * [直接内存](content/part1/运行时数据区域/直接内存.md)
   
 * [对象的知识](content/part1/对象的知识.md)
-* [对象的生命周期](content/part1/对象的知识/对象的生命周期.md)
+  * [对象的生命周期](content/part1/对象的知识/对象的生命周期.md)
   * [对象的内存布局](content/part1/对象的知识/对象的内存布局.md)
   * [对象的访问定位](content/part1/对象的知识/对象的访问定位.md)
 
