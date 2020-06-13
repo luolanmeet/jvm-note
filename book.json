@@ -10,8 +10,11 @@
 	"plugins": [
 		"-search",
         "-sharing",
-        "-highlight"
+		"chapter-fold"
     ],
+	"pluginsConfig": {
+        
+    },
 	"styles": {
         "website": "styles/website.css"
     }
