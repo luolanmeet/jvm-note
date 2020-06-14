@@ -23,4 +23,5 @@
 
 * [垃圾收集器](content/part2/垃圾收集器.md)
   * [对象存活的判断](content/part2/垃圾收集器/对象存活的判断.md)
+  * [回收方法区](content/part2/垃圾收集器/回收方法区.md)
 
