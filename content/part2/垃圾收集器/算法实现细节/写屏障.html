@@ -1,0 +1,780 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>写屏障 · jvm笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="chenken">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../../../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="并发可达性分析.html" />
+    
+    
+    <link rel="prev" href="记忆集与卡表.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">☕️Java虚拟机</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../">
+            
+                <a href="../../../../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍔内存区域</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../../part1/运行时数据区域.html">
+            
+                <a href="../../../part1/运行时数据区域.html">
+            
+                    
+                    运行时数据区域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../../../part1/运行时数据区域/程序计数器.html">
+            
+                <a href="../../../part1/运行时数据区域/程序计数器.html">
+            
+                    
+                    程序计数器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../../../part1/运行时数据区域/Java虚拟机栈.html">
+            
+                <a href="../../../part1/运行时数据区域/Java虚拟机栈.html">
+            
+                    
+                    Java虚拟机栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../../../part1/运行时数据区域/本地方法栈.html">
+            
+                <a href="../../../part1/运行时数据区域/本地方法栈.html">
+            
+                    
+                    本地方法栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../../../part1/运行时数据区域/Java堆.html">
+            
+                <a href="../../../part1/运行时数据区域/Java堆.html">
+            
+                    
+                    Java堆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../../../part1/运行时数据区域/方法区.html">
+            
+                <a href="../../../part1/运行时数据区域/方法区.html">
+            
+                    
+                    方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../../../part1/运行时数据区域/直接内存.html">
+            
+                <a href="../../../part1/运行时数据区域/直接内存.html">
+            
+                    
+                    直接内存
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../../part1/对象的知识.html">
+            
+                <a href="../../../part1/对象的知识.html">
+            
+                    
+                    对象的知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../../../part1/对象的知识/对象的生命周期.html">
+            
+                <a href="../../../part1/对象的知识/对象的生命周期.html">
+            
+                    
+                    对象的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../../../part1/对象的知识/对象的内存布局.html">
+            
+                <a href="../../../part1/对象的知识/对象的内存布局.html">
+            
+                    
+                    对象的内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../../../part1/对象的知识/对象的访问定位.html">
+            
+                <a href="../../../part1/对象的知识/对象的访问定位.html">
+            
+                    
+                    对象的访问定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍨垃圾收集器</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../垃圾收集器.html">
+            
+                <a href="../../垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../对象存活的判断.html">
+            
+                <a href="../对象存活的判断.html">
+            
+                    
+                    对象存活的判断
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.2" data-path="../回收方法区.html">
+            
+                <a href="../回收方法区.html">
+            
+                    
+                    回收方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3" data-path="../垃圾收集算法.html">
+            
+                <a href="../垃圾收集算法.html">
+            
+                    
+                    垃圾收集算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.3.1" data-path="../垃圾收集算法/标记-清除算法.html">
+            
+                <a href="../垃圾收集算法/标记-清除算法.html">
+            
+                    
+                    标记-清除算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3.2" data-path="../垃圾收集算法/标记-复制算法.html">
+            
+                <a href="../垃圾收集算法/标记-复制算法.html">
+            
+                    
+                    标记-复制算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3.3" data-path="../垃圾收集算法/标记-整理算法.html">
+            
+                <a href="../垃圾收集算法/标记-整理算法.html">
+            
+                    
+                    标记-整理算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4" data-path="../算法实现细节.html">
+            
+                <a href="../算法实现细节.html">
+            
+                    
+                    算法实现细节
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.4.1" data-path="根节点枚举.html">
+            
+                <a href="根节点枚举.html">
+            
+                    
+                    根节点枚举
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.2" data-path="安全点.html">
+            
+                <a href="安全点.html">
+            
+                    
+                    安全点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.3" data-path="安全区域.html">
+            
+                <a href="安全区域.html">
+            
+                    
+                    安全区域
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.4" data-path="记忆集与卡表.html">
+            
+                <a href="记忆集与卡表.html">
+            
+                    
+                    记忆集与卡表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.1.4.5" data-path="写屏障.html">
+            
+                <a href="写屏障.html">
+            
+                    
+                    写屏障
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.6" data-path="并发可达性分析.html">
+            
+                <a href="并发可达性分析.html">
+            
+                    
+                    并发可达性分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5" data-path="../垃圾收集器.html">
+            
+                <a href="../垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.5.1" data-path="../垃圾收集器/Serial收集器.html">
+            
+                <a href="../垃圾收集器/Serial收集器.html">
+            
+                    
+                    Serial 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.2" data-path="../垃圾收集器/ParNew收集器.html">
+            
+                <a href="../垃圾收集器/ParNew收集器.html">
+            
+                    
+                    ParNew 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.3" data-path="../垃圾收集器/Parallel Scavenge收集器.html">
+            
+                <a href="../垃圾收集器/Parallel Scavenge收集器.html">
+            
+                    
+                    Parallel Scavenge 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.4" data-path="../垃圾收集器/Serial Old收集器.html">
+            
+                <a href="../垃圾收集器/Serial Old收集器.html">
+            
+                    
+                    Serial Old 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.5" data-path="../垃圾收集器/Parallel Old收集器.html">
+            
+                <a href="../垃圾收集器/Parallel Old收集器.html">
+            
+                    
+                    Parallel Old 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.6" data-path="../垃圾收集器/CMS收集器.html">
+            
+                <a href="../垃圾收集器/CMS收集器.html">
+            
+                    
+                    CMS 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../.." >写屏障</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x5199;&#x5C4F;&#x969C;">&#x5199;&#x5C4F;&#x969C;</h3>
+<p>&#x8BB0;&#x5FC6;&#x96C6;&#x7F29;&#x51CF;&#x4E86;&#x8DE8;&#x4EE3;&#x5F15;&#x7528;<code>GC Roots</code>&#x626B;&#x63CF;&#x8303;&#x56F4;&#x8FC7;&#x5927;&#x7684;&#x95EE;&#x9898;&#xFF0C;</p>
+<p>&#x8BB0;&#x5FC6;&#x96C6;&#x901A;&#x5E38;&#x4F7F;&#x7528;&#x5361;&#x8868;&#x5B9E;&#x73B0;&#xFF0C;&#x5361;&#x8868;&#x5143;&#x7D20;&#x53D8;&#x810F;&#xFF0C;&#x8868;&#x793A;&#x5361;&#x8868;&#x5143;&#x7D20;&#x5BF9;&#x5E94;&#x7684;&#x5361;&#x9875;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x5B58;&#x5728;&#x8DE8;&#x4EE3;&#x5F15;&#x7528;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x5361;&#x8868;&#x5143;&#x7D20;&#x4F55;&#x65F6;&#x53D8;&#x810F;&#xFF1F;&#x5361;&#x53D8;&#x7531;&#x8C01;&#x7EF4;&#x62A4;&#xFF1F;</p>
+<h4 id="&#x5361;&#x8868;&#x5143;&#x7D20;&#x4F55;&#x65F6;&#x53D8;&#x810F;&#xFF1F;">&#x5361;&#x8868;&#x5143;&#x7D20;&#x4F55;&#x65F6;&#x53D8;&#x810F;&#xFF1F;</h4>
+<p>&#x6709;&#x5176;&#x4ED6;&#x5206;&#x4EE3;&#x533A;&#x57DF;&#x5BF9;&#x8C61;&#x5F15;&#x7528;&#x4E86;&#x672C;&#x533A;&#x57DF;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5176;&#x5BF9;&#x5E94;&#x7684;&#x5361;&#x8868;&#x5143;&#x7D20;&#x5C31;&#x5E94;&#x8BE5;&#x53D8;&#x810F;&#xFF0C;</p>
+<p>&#x53D8;&#x810F;&#x7684;&#x65F6;&#x673A;&#x539F;&#x5219;&#x4E0A;&#x5E94;&#x8BE5;&#x53D1;&#x751F;&#x5728;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x5B57;&#x6BB5;&#x8D4B;&#x503C;&#x7684;&#x90A3;&#x4E00;&#x523B;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x662F;&#x89E3;&#x91CA;&#x6267;&#x884C;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x6709;&#x5145;&#x5206;&#x7684;&#x4ECB;&#x5165;&#x7A7A;&#x95F4;&#x3002;&#x4F46;&#x7ECF;&#x8FC7;&#x5373;&#x65F6;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x4EE3;&#x7801;</p>
+<p>&#x5DF2;&#x7ECF;&#x662F;&#x7EAF;&#x7CB9;&#x7684;&#x673A;&#x5668;&#x6307;&#x4EE4;&#x6D41;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x5FC5;&#x987B;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x5728;&#x673A;&#x5668;&#x7801;&#x5C42;&#x9762;&#x7684;&#x624B;&#x6BB5;&#x628A;&#x7EF4;&#x62A4;&#x5361;&#x8868;&#x7684;&#x52A8;&#x4F5C;</p>
+<p>&#x653E;&#x5230;&#x6BCF;&#x4E00;&#x4E2A;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x4E4B;&#x4E2D;&#x3002;</p>
+<h4 id="&#x5199;&#x5C4F;&#x969C;&#xFF08;write-barrier&#xFF09;">&#x5199;&#x5C4F;&#x969C;&#xFF08;Write Barrier&#xFF09;</h4>
+<p>&#x5728;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x91CC;&#x662F;&#x901A;&#x8FC7;&#x5199;&#x5C4F;&#x969C;&#xFF08;<code>Write Barrier</code>&#xFF09;&#x6280;&#x672F;&#x7EF4;&#x62A4;&#x5361;&#x8868;&#x72B6;&#x6001;&#x7684;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E0D;&#x662F;&#x5185;&#x5B58;&#x5C4F;&#x969C;&#x3002;</p>
+<p>&#x5199;&#x5C4F;&#x969C;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x662F;&#x865A;&#x62DF;&#x673A;&#x5C42;&#x9762;&#x5BF9;&#x201C;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x5B57;&#x6BB5;&#x8D4B;&#x503C;&#x201D;&#x8FD9;&#x4E2A;&#x52A8;&#x4F5C;&#x7684;<code>AOP</code>&#x5207;&#x9762;&#xFF0C;&#x5728;&#x5F15;&#x7528;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;&#x65F6;&#x4F1A;&#x4EA7;&#x751F;</p>
+<p>&#x4E00;&#x4E2A;&#x73AF;&#x5F62;&#xFF08;<code>Around</code>&#xFF09;&#x901A;&#x77E5;&#xFF0C;&#x63D0;&#x4F9B;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x989D;&#x5916;&#x7684;&#x52A8;&#x4F5C;&#xFF0C;&#x8D4B;&#x503C;&#x524D;&#x7684;&#x90E8;&#x5206;&#x7684;&#x5199;&#x5C4F;&#x969C;&#x53EB;&#x505A;&#x5199;&#x524D;&#x5C4F;&#x969C;&#xFF08;<code>Pre-Write Barrier</code>&#xFF09;,</p>
+<p>&#x8D4B;&#x503C;&#x540E;&#x7684;&#x5219;&#x53EB;&#x5199;&#x540E;&#x5C4F;&#x969C;&#xFF08;<code>Post-Write Barrier</code>&#xFF09;&#x3002;</p>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">oop_field_store</span><span class="hljs-params">(oop* field, oop new_value)</span> </span>{
+    <span class="hljs-comment">// &#x5F15;&#x7528;&#x5B57;&#x6BB5;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;</span>
+    *field = new_value;
+    <span class="hljs-comment">// &#x5199;&#x540E;&#x5C4F;&#x969C;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x66F4;&#x65B0;&#x5361;&#x8868;</span>
+    post_write_barrier(field, new_value);
+}
+</code></pre>
+<p>&#x5E94;&#x7528;&#x5199;&#x5C4F;&#x969C;&#x540E;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4F1A;&#x4E3A;&#x6240;&#x6709;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x751F;&#x6210;&#x76F8;&#x5E94;&#x6307;&#x4EE4;&#xFF0C;&#x65E0;&#x8BBA;&#x66F4;&#x65B0;&#x7684;&#x662F;&#x4E0D;&#x662F;&#x8001;&#x5E74;&#x4EE3;&#x5BF9;&#x65B0;&#x751F;&#x4EE3;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF0C;</p>
+<p>&#x6BCF;&#x6B21;&#x53EA;&#x8981;&#x5BF9;&#x5F15;&#x7528;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x90FD;&#x4F1A;&#x89E6;&#x53D1;&#x66F4;&#x65B0;&#x5361;&#x8868;&#x7684;&#x52A8;&#x4F5C;&#x3002;&#x8FD9;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x5F00;&#x9500;&#x4E0E;<code>Minor GC</code>&#x65F6;&#x626B;&#x63CF;&#x6574;&#x4E2A;&#x8001;&#x5E74;&#x4EE3;&#x7684;&#x4EE3;&#x4EF7;&#x8981;&#x4F4E;&#x5F97;&#x591A;&#x3002;</p>
+<h4 id="&#x4F2A;&#x5171;&#x4EAB;&#x95EE;&#x9898;&#xFF08;false-sharing&#xFF09;">&#x4F2A;&#x5171;&#x4EAB;&#x95EE;&#x9898;&#xFF08;False Sharing&#xFF09;</h4>
+<p>&#x4F2A;&#x5171;&#x4EAB;&#x662F;&#x5904;&#x7406;&#x5E76;&#x53D1;&#x5E95;&#x5C42;&#x7EC6;&#x8282;&#x65F6;&#x4E00;&#x79CD;&#x7ECF;&#x5E38;&#x9700;&#x8981;&#x8003;&#x8651;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x73B0;&#x4EE3;&#x4E2D;&#x592E;&#x5904;&#x7406;&#x5668;&#x7684;&#x7F13;&#x5B58;&#x7CFB;&#x7EDF;&#x4E2D;&#x662F;&#x4EE5;&#x7F13;&#x5B58;&#x884C;&#xFF08;<code>Cache Line</code>&#xFF09;&#x4E3A;&#x5355;&#x4F4D;&#x5B58;&#x50A8;&#x7684;&#xFF0C;</p>
+<p>&#x5F53;&#x591A;&#x7EBF;&#x7A0B;&#x4FEE;&#x6539;&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#x7684;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x6070;&#x597D;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x4E2A;&#x7F13;&#x5B58;&#x884C;&#xFF0C;&#x5C31;&#x4F1A;&#x5F7C;&#x6B64;&#x5F71;&#x54CD;&#xFF08;&#x5199;&#x56DE;&#x3001;&#x65E0;&#x6548;&#x5316;&#x6216;&#x540C;&#x6B65;&#xFF09;&#x800C;&#x5BFC;&#x81F4;&#x6027;&#x80FD;&#x964D;&#x4F4E;&#x3002;</p>
+<h5 id="java&#x9A8C;&#x8BC1;&#x4F2A;&#x5171;&#x4EAB;"><code>Java</code>&#x9A8C;&#x8BC1;&#x4F2A;&#x5171;&#x4EAB;</h5>
+<pre><code class="lang-Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoOne</span> </span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span> </span>{
+        <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> x;
+    }
+
+    T[] ts = <span class="hljs-keyword">new</span> T[<span class="hljs-number">2</span>];
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        ts[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> T();
+        ts[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> T();
+
+        Thread t1 = <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000000</span>; i++)
+                ts[<span class="hljs-number">0</span>].x = i;
+        });
+        Thread t2 = <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000000</span>; i++)
+                ts[<span class="hljs-number">1</span>].x = i;
+        });
+
+        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();
+        t1.start();t2.start();
+        t1.join();t2.join();
+
+        System.out.println(<span class="hljs-string">&quot;use time : &quot;</span> + (System.currentTimeMillis() - start));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        <span class="hljs-keyword">new</span> DemoOne().method();
+    }
+
+}
+</code></pre>
+<pre><code class="lang-Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoTwo</span> </span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span> </span>{
+        <span class="hljs-keyword">long</span> p1, p2, p3, p4, p5, p6;
+        <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> x;
+        <span class="hljs-keyword">long</span> p7, p8, p9, p10, p11, p12;
+    }
+
+    T[] ts = <span class="hljs-keyword">new</span> T[<span class="hljs-number">2</span>];
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        ts[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> T();
+        ts[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> T();
+
+        Thread t1 = <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000000</span>; i++)
+                ts[<span class="hljs-number">0</span>].x = i;
+        });
+        Thread t2 = <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000000</span>; i++)
+                ts[<span class="hljs-number">1</span>].x = i;
+        });
+
+        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();
+        t1.start();t2.start();
+        t1.join();t2.join();
+
+        System.out.println(<span class="hljs-string">&quot;use time : &quot;</span> + (System.currentTimeMillis() - start));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        <span class="hljs-keyword">new</span> DemoTwo().method();
+    }
+
+}
+</code></pre>
+<p><code>DemoOne</code>&#x7528;&#x65F6;&#xFF1A;3247 &#x6BEB;&#x79D2;</p>
+<p><code>DemoTwo</code>&#x7528;&#x65F6;&#xFF1A;1368 &#x6BEB;&#x79D2;</p>
+<p>&#x89E3;&#x91CA;</p>
+<blockquote>
+<p>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E00;&#x6B21;&#x8BFB;&#x53D6; 64 &#x4E2A;&#x5B57;&#x8282;&#x4E3A;&#x4E00;&#x4E2A;&#x7F13;&#x5B58;&#x884C;&#xFF08;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#xFF09;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x4E86; volatile &#x5173;&#x952E;&#x5B57;&#xFF0C;x&#x53D8;&#x91CF;&#x5BF9;&#x4E8E;&#x7EBF;&#x7A0B;&#x662F;&#x53EF;&#x89C1;&#x7684;&#xFF0C;x&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#x4F1A;&#x4F7F;&#x7F13;&#x5B58;&#x884C;&#x5931;&#x6548;&#x3002;</p>
+<p><code>T[] ts = new T[2];</code> &#x5BF9;&#x8C61;&#x5927;&#x5C0F;&#x5F88;&#x5C0F;&#x65F6;&#xFF0C;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#x4F1A;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x7F13;&#x5B58;&#x884C;&#x4E2D;&#x3002;</p>
+<p>&#x5176;&#x4E2D;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;x&#x53D1;&#x751F;&#x53D8;&#x5316;&#x90FD;&#x4F1A;&#x4F7F;&#x7F13;&#x5B58;&#x884C;&#x5931;&#x6548;&#x3002;&#x4E92;&#x76F8;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x586B;&#x5145;&#x5BF9;&#x8C61;&#x5927;&#x5C0F;&#x6765;&#x907F;&#x514D;&#xFF08;<code>Disruptor</code>&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF09;&#xFF0C;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; <code>@Contended</code> &#x907F;&#x514D;&#x3002;</p>
+</blockquote>
+<h4 id="&#x5361;&#x53D8;&#x66F4;&#x65B0;&#x4F2A;&#x5171;&#x4EAB;&#x95EE;&#x9898;&#x5904;&#x7406;">&#x5361;&#x53D8;&#x66F4;&#x65B0;&#x4F2A;&#x5171;&#x4EAB;&#x95EE;&#x9898;&#x5904;&#x7406;</h4>
+<p>&#x4E0D;&#x91C7;&#x7528;&#x65E0;&#x6761;&#x4EF6;&#x7684;&#x5199;&#x5C4F;&#x969C;&#xFF0C;&#x800C;&#x662F;&#x5148;&#x68C0;&#x67E5;&#x5361;&#x8868;&#x6807;&#x8BB0;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x8BE5;&#x5361;&#x8868;&#x5143;&#x7D20;&#x672A;&#x88AB;&#x6807;&#x8BB0;&#x8FC7;&#x65F6;&#x624D;&#x5C06;&#x5176;&#x6807;&#x8BB0;&#x4E3A;&#x53D8;&#x810F;&#x3002;</p>
+<pre><code class="lang-C++"><span class="hljs-keyword">if</span> (CARD_TABLE [<span class="hljs-keyword">this</span> address &gt;&gt; <span class="hljs-number">9</span>] != <span class="hljs-number">0</span>)
+    CARD_TABLE [<span class="hljs-keyword">this</span> address &gt;&gt; <span class="hljs-number">9</span>] = <span class="hljs-number">0</span>;
+</code></pre>
+<p>&#x5728;<code>JDK7</code>&#x4E4B;&#x540E;&#xFF0C;<code>HotSpot</code>&#x865A;&#x62DF;&#x673A;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x53C2;&#x6570;<code>-XX:+UseCondCardMark</code>&#xFF0C;&#x7528;&#x6765;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5F00;&#x542F;&#x5361;&#x8868;&#x66F4;&#x65B0;&#x7684;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#x3002;</p>
+<p>&#x5F00;&#x542F;&#x4F1A;&#x589E;&#x52A0;&#x4E00;&#x6B21;&#x989D;&#x5916;&#x5224;&#x65AD;&#x7684;&#x5F00;&#x9500;&#xFF0C;&#x4E0D;&#x5F00;&#x542F;&#x4F1A;&#x6709;&#x4F2A;&#x5171;&#x4EAB;&#x95EE;&#x9898;&#x3002;</p>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="记忆集与卡表.html" class="navigation navigation-prev " aria-label="Previous page: 记忆集与卡表">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="并发可达性分析.html" class="navigation navigation-next " aria-label="Next page: 并发可达性分析">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"写屏障","level":"3.1.4.5","depth":3,"next":{"title":"并发可达性分析","level":"3.1.4.6","depth":3,"path":"content/part2/垃圾收集器/算法实现细节/并发可达性分析.md","ref":"content/part2/垃圾收集器/算法实现细节/并发可达性分析.md","articles":[]},"previous":{"title":"记忆集与卡表","level":"3.1.4.4","depth":3,"path":"content/part2/垃圾收集器/算法实现细节/记忆集与卡表.md","ref":"content/part2/垃圾收集器/算法实现细节/记忆集与卡表.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-sharing","chapter-fold","livereload"],"root":".","styles":{"website":"styles/website.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"highlight":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"chenken","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"jvm笔记","language":"zh-hans","output.name":"site","gitbook":"3.2.3","description":"Java虚拟机相关知识笔记"},"file":{"path":"content/part2/垃圾收集器/算法实现细节/写屏障.md","mtime":"2020-06-15T15:50:45.763Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-17T14:58:30.082Z"},"basePath":"../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
