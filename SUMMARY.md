@@ -48,4 +48,5 @@
 
 * [虚拟机执行子系统](content/part3/虚拟机执行子系统.md)
   * [类文件结构](content/part3/虚拟机执行子系统/类文件结构.md)
+    * [魔数与Class文件的版本](content/part3/虚拟机执行子系统/类文件结构/魔数与Class文件的版本.md)
 
