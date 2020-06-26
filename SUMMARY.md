@@ -52,4 +52,12 @@
     * [常量池](content/part3/虚拟机执行子系统/类文件结构/常量池.md)
     * [Class的访问标志、类、父类、接口索引](content/part3/虚拟机执行子系统/类文件结构/Class的访问标志、类、父类、接口索引.md)
     * [字段表集合](content/part3/虚拟机执行子系统/类文件结构/字段表集合.md)
+    * [方法表集合](content/part3/虚拟机执行子系统/类文件结构/方法表集合.md)
+    * [属性表](content/part3/虚拟机执行子系统/类文件结构/属性表.md)
+      * [Code 属性](content/part3/虚拟机执行子系统/类文件结构/属性表/Code 属性.md)
+      * [Exceptions 属性](content/part3/虚拟机执行子系统/类文件结构/属性表/Exceptions 属性.md)
+      * [ConstantValue 属性](content/part3/虚拟机执行子系统/类文件结构/属性表/ConstantValue 属性.md)
+  
+  * [字节码指令简介](content/part3/虚拟机执行子系统/字节码指令简介.md)
+    * [加载和存储指令](content/part3/虚拟机执行子系统/字节码指令简介/加载和存储指令.md)
 
