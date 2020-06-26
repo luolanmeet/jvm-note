@@ -1,0 +1,890 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Code 属性 · jvm笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="chenken">
+        
+        
+    
+    <link rel="stylesheet" href="../../../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../../../../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Exceptions 属性.html" />
+    
+    
+    <link rel="prev" href="../属性表.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">☕️Java虚拟机</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../../../">
+            
+                <a href="../../../../../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍔内存区域</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../../../part1/运行时数据区域.html">
+            
+                <a href="../../../../part1/运行时数据区域.html">
+            
+                    
+                    运行时数据区域
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../../../../part1/运行时数据区域/程序计数器.html">
+            
+                <a href="../../../../part1/运行时数据区域/程序计数器.html">
+            
+                    
+                    程序计数器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../../../../part1/运行时数据区域/Java虚拟机栈.html">
+            
+                <a href="../../../../part1/运行时数据区域/Java虚拟机栈.html">
+            
+                    
+                    Java虚拟机栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../../../../part1/运行时数据区域/本地方法栈.html">
+            
+                <a href="../../../../part1/运行时数据区域/本地方法栈.html">
+            
+                    
+                    本地方法栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../../../../part1/运行时数据区域/Java堆.html">
+            
+                <a href="../../../../part1/运行时数据区域/Java堆.html">
+            
+                    
+                    Java堆
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../../../../part1/运行时数据区域/方法区.html">
+            
+                <a href="../../../../part1/运行时数据区域/方法区.html">
+            
+                    
+                    方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../../../../part1/运行时数据区域/直接内存.html">
+            
+                <a href="../../../../part1/运行时数据区域/直接内存.html">
+            
+                    
+                    直接内存
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../../../part1/对象的知识.html">
+            
+                <a href="../../../../part1/对象的知识.html">
+            
+                    
+                    对象的知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../../../../part1/对象的知识/对象的生命周期.html">
+            
+                <a href="../../../../part1/对象的知识/对象的生命周期.html">
+            
+                    
+                    对象的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../../../../part1/对象的知识/对象的内存布局.html">
+            
+                <a href="../../../../part1/对象的知识/对象的内存布局.html">
+            
+                    
+                    对象的内存布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../../../../part1/对象的知识/对象的访问定位.html">
+            
+                <a href="../../../../part1/对象的知识/对象的访问定位.html">
+            
+                    
+                    对象的访问定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍨垃圾收集器</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../../../part2/垃圾收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../../../../part2/垃圾收集器/对象存活的判断.html">
+            
+                <a href="../../../../part2/垃圾收集器/对象存活的判断.html">
+            
+                    
+                    对象存活的判断
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.2" data-path="../../../../part2/垃圾收集器/回收方法区.html">
+            
+                <a href="../../../../part2/垃圾收集器/回收方法区.html">
+            
+                    
+                    回收方法区
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3" data-path="../../../../part2/垃圾收集器/垃圾收集算法.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集算法.html">
+            
+                    
+                    垃圾收集算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.3.1" data-path="../../../../part2/垃圾收集器/垃圾收集算法/标记-清除算法.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集算法/标记-清除算法.html">
+            
+                    
+                    标记-清除算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3.2" data-path="../../../../part2/垃圾收集器/垃圾收集算法/标记-复制算法.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集算法/标记-复制算法.html">
+            
+                    
+                    标记-复制算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.3.3" data-path="../../../../part2/垃圾收集器/垃圾收集算法/标记-整理算法.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集算法/标记-整理算法.html">
+            
+                    
+                    标记-整理算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4" data-path="../../../../part2/垃圾收集器/算法实现细节.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节.html">
+            
+                    
+                    算法实现细节
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.4.1" data-path="../../../../part2/垃圾收集器/算法实现细节/根节点枚举.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/根节点枚举.html">
+            
+                    
+                    根节点枚举
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.2" data-path="../../../../part2/垃圾收集器/算法实现细节/安全点.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/安全点.html">
+            
+                    
+                    安全点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.3" data-path="../../../../part2/垃圾收集器/算法实现细节/安全区域.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/安全区域.html">
+            
+                    
+                    安全区域
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.4" data-path="../../../../part2/垃圾收集器/算法实现细节/记忆集与卡表.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/记忆集与卡表.html">
+            
+                    
+                    记忆集与卡表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.5" data-path="../../../../part2/垃圾收集器/算法实现细节/写屏障.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/写屏障.html">
+            
+                    
+                    写屏障
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.4.6" data-path="../../../../part2/垃圾收集器/算法实现细节/并发可达性分析.html">
+            
+                <a href="../../../../part2/垃圾收集器/算法实现细节/并发可达性分析.html">
+            
+                    
+                    并发可达性分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5" data-path="../../../../part2/垃圾收集器/垃圾收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器.html">
+            
+                    
+                    垃圾收集器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.5.1" data-path="../../../../part2/垃圾收集器/垃圾收集器/Serial收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/Serial收集器.html">
+            
+                    
+                    Serial 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.2" data-path="../../../../part2/垃圾收集器/垃圾收集器/ParNew收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/ParNew收集器.html">
+            
+                    
+                    ParNew 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.3" data-path="../../../../part2/垃圾收集器/垃圾收集器/Parallel Scavenge收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/Parallel Scavenge收集器.html">
+            
+                    
+                    Parallel Scavenge 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.4" data-path="../../../../part2/垃圾收集器/垃圾收集器/Serial Old收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/Serial Old收集器.html">
+            
+                    
+                    Serial Old 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.5" data-path="../../../../part2/垃圾收集器/垃圾收集器/Parallel Old收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/Parallel Old收集器.html">
+            
+                    
+                    Parallel Old 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.6" data-path="../../../../part2/垃圾收集器/垃圾收集器/CMS收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/CMS收集器.html">
+            
+                    
+                    CMS 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.5.7" data-path="../../../../part2/垃圾收集器/垃圾收集器/Garbage First收集器.html">
+            
+                <a href="../../../../part2/垃圾收集器/垃圾收集器/Garbage First收集器.html">
+            
+                    
+                    Garbage First 收集器
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">🍥虚拟机执行子系统</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../../虚拟机执行子系统.html">
+            
+                <a href="../../../虚拟机执行子系统.html">
+            
+                    
+                    虚拟机执行子系统
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1.1" data-path="../../类文件结构.html">
+            
+                <a href="../../类文件结构.html">
+            
+                    
+                    类文件结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1.1.1" data-path="../魔数与Class文件的版本.html">
+            
+                <a href="../魔数与Class文件的版本.html">
+            
+                    
+                    魔数与Class文件的版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.2" data-path="../常量池.html">
+            
+                <a href="../常量池.html">
+            
+                    
+                    常量池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.3" data-path="../Class的访问标志、类、父类、接口索引.html">
+            
+                <a href="../Class的访问标志、类、父类、接口索引.html">
+            
+                    
+                    Class的访问标志、类、父类、接口索引
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.4" data-path="../字段表集合.html">
+            
+                <a href="../字段表集合.html">
+            
+                    
+                    字段表集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.5" data-path="../方法表集合.html">
+            
+                <a href="../方法表集合.html">
+            
+                    
+                    方法表集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.6" data-path="../属性表.html">
+            
+                <a href="../属性表.html">
+            
+                    
+                    属性表
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="4.1.1.6.1" data-path="Code 属性.html">
+            
+                <a href="Code 属性.html">
+            
+                    
+                    Code 属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.6.2" data-path="Exceptions 属性.html">
+            
+                <a href="Exceptions 属性.html">
+            
+                    
+                    Exceptions 属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.1.6.3" data-path="ConstantValue 属性.html">
+            
+                <a href="ConstantValue 属性.html">
+            
+                    
+                    ConstantValue 属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.2" data-path="../../字节码指令简介.html">
+            
+                <a href="../../字节码指令简介.html">
+            
+                    
+                    字节码指令简介
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1.2.1" data-path="../../字节码指令简介/加载和存储指令.html">
+            
+                <a href="../../字节码指令简介/加载和存储指令.html">
+            
+                    
+                    加载和存储指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../../../.." >Code 属性</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="code-&#x5C5E;&#x6027;">Code &#x5C5E;&#x6027;</h3>
+<p><code>Java</code>&#x7A0B;&#x5E8F;&#x65B9;&#x6CD5;&#x4F53;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x7ECF;&#x8FC7;<code>Javac</code>&#x7F16;&#x8BD1;&#x5668;&#x5904;&#x7406;&#x4E4B;&#x540E;&#xFF0C;&#x6700;&#x7EC8;&#x53D8;&#x6210;&#x5B57;&#x8282;&#x7801;&#x6307;&#x4EE4;&#x5B58;&#x50A8;&#x5728;<code>Code</code>&#x5C5E;&#x6027;&#x5185;&#x3002;</p>
+<p><code>Code</code>&#x5C5E;&#x6027;&#x51FA;&#x73B0;&#x5728;&#x65B9;&#x6CD5;&#x8868;&#x7684;&#x5C5E;&#x6027;&#x96C6;&#x5408;&#x4E4B;&#x4E2D;&#xFF0C;&#x5E76;&#x975E;&#x6240;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#x8868;&#x90FD;&#x5FC5;&#x987B;&#x5B58;&#x5728;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x8B6C;&#x5982;&#x63A5;&#x53E3;&#x6216;&#x62BD;&#x8C61;&#x7C7B;&#x3002;</p>
+<p><img src="img/Code &#x5C5E;&#x6027;.png" alt=""></p>
+<h4 id="&#x7EC6;&#x8282;">&#x7EC6;&#x8282;</h4>
+<ul>
+<li><p><code>max_stack</code>&#xFF1A;&#x4EE3;&#x8868;&#x64CD;&#x4F5C;&#x6570;&#x6808;&#xFF08;<code>Operand Stack</code>&#xFF09;&#x6DF1;&#x5EA6;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;&#x5728;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x610F;&#x65F6;&#x523B;&#xFF0C;&#x64CD;&#x4F5C;&#x6570;&#x6808;&#x90FD;&#x4E0D;&#x4F1A;&#x8D85;&#x8FC7;&#x8FD9;&#x4E2A;&#x6DF1;&#x5EA6;&#x3002;&#x865A;&#x62DF;&#x673A;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x503C;&#x6765;&#x5206;&#x914D;&#x6808;&#x6862;&#xFF08;<code>Stack Frame</code>&#xFF09;&#x4E2D;&#x7684;&#x64CD;&#x4F5C;&#x6808;&#x6DF1;&#x5EA6;&#x3002;</p>
+</li>
+<li><p><code>max_locals</code>&#xFF1A;&#x4EE3;&#x8868;&#x4E86;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x8868;&#x6240;&#x9700;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;&#x53D8;&#x91CF;&#x69FD;&#x3002;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x4F1A;&#x6709;&#x9690;&#x85CF;&#x53C2;&#x6570;<code>this</code>&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x5E76;&#x4E0D;&#x662F;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x591A;&#x5C11;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x5C31;&#x5206;&#x914D;&#x591A;&#x5C11;&#x53D8;&#x91CF;&#x69FD;&#xFF0C;&#x5F53;&#x53D8;&#x91CF;&#x8D85;&#x51FA;&#x5176;&#x4F5C;&#x7528;&#x57DF;&#x4E4B;&#x540E;&#xFF0C;&#x53D8;&#x91CF;&#x5360;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x69FD;&#x53EF;&#x4EE5;&#x88AB;&#x5176;&#x4ED6;&#x53D8;&#x91CF;&#x91CD;&#x7528;&#x3002;</p>
+</li>
+<li><p><code>code_length</code>&#xFF1A;&#x662F;&#x4E00;&#x4E2A;<code>u4</code>&#x7C7B;&#x578B;&#x7684;&#x957F;&#x5EA6;&#x503C;&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;&#x6700;&#x5927;&#x503C;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;2&#x7684;32&#x6B21;&#x5E42;&#xFF0C;&#x4F46;&#x300A;Java&#x865A;&#x62DF;&#x673A;&#x89C4;&#x8303;&#x300B;&#x4E2D;&#x660E;&#x786E;&#x9650;&#x5236;&#x4E86;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x4E0D;&#x5141;&#x8BB8;&#x8D85;&#x8FC7;65535&#x6761;&#x5B57;&#x8282;&#x7801;&#x6307;&#x4EE4;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x53EA;&#x4F7F;&#x7528;&#x4E86;<code>u2</code>&#x7684;&#x957F;&#x5EA6;&#x3002;</p>
+</li>
+<li><p><code>code</code>&#xFF1A;&#x4EE3;&#x8868;&#x5B57;&#x8282;&#x7801;&#x6307;&#x4EE4;&#xFF0C;&#x6CE8;&#x610F;&#x5230;&#x662F;<code>u1</code>&#x7C7B;&#x578B;&#xFF0C;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x8868;&#x8FBE;256&#xFF08;0~255&#xFF09;&#x6761;&#x6307;&#x4EE4;&#x3002;</p>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../属性表.html" class="navigation navigation-prev " aria-label="Previous page: 属性表">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Exceptions 属性.html" class="navigation navigation-next " aria-label="Next page: Exceptions 属性">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Code 属性","level":"4.1.1.6.1","depth":4,"next":{"title":"Exceptions 属性","level":"4.1.1.6.2","depth":4,"path":"content/part3/虚拟机执行子系统/类文件结构/属性表/Exceptions 属性.md","ref":"content/part3/虚拟机执行子系统/类文件结构/属性表/Exceptions 属性.md","articles":[]},"previous":{"title":"属性表","level":"4.1.1.6","depth":3,"path":"content/part3/虚拟机执行子系统/类文件结构/属性表.md","ref":"content/part3/虚拟机执行子系统/类文件结构/属性表.md","articles":[{"title":"Code 属性","level":"4.1.1.6.1","depth":4,"path":"content/part3/虚拟机执行子系统/类文件结构/属性表/Code 属性.md","ref":"content/part3/虚拟机执行子系统/类文件结构/属性表/Code 属性.md","articles":[]},{"title":"Exceptions 属性","level":"4.1.1.6.2","depth":4,"path":"content/part3/虚拟机执行子系统/类文件结构/属性表/Exceptions 属性.md","ref":"content/part3/虚拟机执行子系统/类文件结构/属性表/Exceptions 属性.md","articles":[]},{"title":"ConstantValue 属性","level":"4.1.1.6.3","depth":4,"path":"content/part3/虚拟机执行子系统/类文件结构/属性表/ConstantValue 属性.md","ref":"content/part3/虚拟机执行子系统/类文件结构/属性表/ConstantValue 属性.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-sharing","chapter-fold","livereload"],"root":".","styles":{"website":"styles/website.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"highlight":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"chenken","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"jvm笔记","language":"zh-hans","output.name":"site","gitbook":"3.2.3","description":"Java虚拟机相关知识笔记"},"file":{"path":"content/part3/虚拟机执行子系统/类文件结构/属性表/Code 属性.md","mtime":"2020-06-26T10:39:50.298Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-26T15:30:18.300Z"},"basePath":"../../../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../../../gitbook/gitbook.js"></script>
+    <script src="../../../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
