@@ -4,6 +4,4 @@
 
 也就是方法描述时在 `throw` 关键字后边列举的异常。
 
-![]()
-
 ![Exceptions 属性](img\Exceptions 属性.png)
