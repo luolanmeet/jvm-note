@@ -4,7 +4,7 @@
 
 `Parallel Scavenge`收集器的目标是达到一个可控的吞吐量（`Throughput`）。
 
-`Parallel Scavenge`收集器拥有自适应的调节策略（GC Ergonomics）。
+`Parallel Scavenge`收集器拥有自适应的调节策略（`GC Ergonomics`）。
 
 #### 参数
 
